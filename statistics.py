@@ -4,10 +4,19 @@ import time
 from helpers import get_daily, mph_to_pace
 
 df = pd.read_csv('strava_activities.csv')
-df = df.sort_values('Start Date Local')
-df = df.iloc[::-1]
+
+def get_data():
+    global df
+
+    df = pd.read_csv('strava_activities.csv')
+    df = df.sort_values('Start Date Local')
+    df = df.iloc[::-1]
 
 def streak():
+    global df
+
+    get_data()
+
     count = 0
 
     # Get current date in epoch
@@ -25,6 +34,9 @@ def streak():
     return count
 
 def current_daily_average_365():
+    global df
+
+    get_data()
     
     total = 0
     total_speed = 0
